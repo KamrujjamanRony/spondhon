@@ -1,139 +1,129 @@
-<!-- <aside
-  id="sidebar-multi-level-sidebar"
-  class="peer fixed top-0 left-0 z-40 w-12 hover:w-72 h-screen overflow-hidden"
-  aria-label="Sidebar"
+<div
+  class="fixed flex flex-col left-0 w-14 hover:w-48 md:w-44 bg-rose-700 h-full text-white transition-all duration-300 border-none z-10 sidebar"
 >
-  <div class="h-full px-3 py-4 overflow-y-auto bg-teal-300 dark:bg-gray-800 overflow-hidden">
-    <ul class="space-y-2 font-medium">
-      <li class="cursor-pointer">
-        <a
-          routerLink="/"
-          class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
-        >
-          <span class="ms-12 text-xl font-bold text-teal-700">SuperSoft</span>
-        </a>
+  <div
+    class="overflow-y-auto overflow-x-hidden flex flex-col justify-between flex-grow"
+  >
+    <ul class="flex flex-col py-4 space-y-1">
+      <li class="px-5 hidden md:block">
+        <div class="flex flex-row items-center h-8">
+          <div class="text-sm font-bold tracking-wide text-white uppercase">
+            Admin panel
+          </div>
+        </div>
       </li>
-      @for (item of sidebarData; track $index) { @if (item?.menu) {
-      <li class="cursor-pointer group">
-        <a
-          [routerLink]="item?.route"
-          type="button"
-          class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-          [attr.aria-controls]="item.label"
-          [attr.data-dropdown-toggle]="item?.label"
-          data-dropdown-trigger="hover"
-        >
-          <app-all-svg [icon]="item.icon"></app-all-svg>
-          <span
-            class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap"
-            >{{ item.label }}</span
-          >
-          @if (item?.menu) {<app-all-svg icon="sidebar-down-arrow"></app-all-svg
-          >}
-        </a>
-        <ul
-          [id]="item?.label"
-          class="hidden peer-hover:block py-2 space-y-2 bg-teal-200 rounded-lg w-[92%]"
-        >
-          @for (subItem of item.menu; track $index) {
-          <li class="cursor-pointer">
-            <a 
-              [routerLink]="subItem?.route"
-              class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-              >{{ subItem.label }}</a
-            >
-          </li>
-          }
-        </ul>
-      </li>
-      } @else{
+      <!-- News List  -->
+      @if (role == 'admin' || role == 'editor') {
       <li>
         <a
-          [routerLink]="item?.route"
-          type="button"
-          class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+          routerLink="/admin/news-list"
+          class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-rose-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-rose-500 pr-6"
         >
-          <app-all-svg [icon]="item.icon"></app-all-svg>
-          <span
-            class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap"
-            >{{ item.label }}</span
-          >
-          @if (item?.menu) {<app-all-svg icon="sidebar-down-arrow"></app-all-svg
-          >}
-        </a>
-      </li>
-      } }
-    </ul>
-  </div>
-</aside> -->
-
-
-<aside
-  id="sidebar-multi-level-sidebar"
-  class="group fixed top-0 left-0 z-40 w-12 hover:w-72 h-screen overflow-hidden"
-  aria-label="Sidebar"
->
-  <div class="h-full pl-2 py-4 overflow-hidden bg-teal-300 dark:bg-gray-800">
-    <ul class="space-y-2 font-medium" id="accordion-collapse" data-accordion="collapse">
-      <li class="cursor-pointer">
-        <a
-          routerLink="/"
-          class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
-        >
-          <span class="ms-12 text-xl font-bold text-teal-700">SuperSoft</span>
-        </a>
-      </li>
-      @for (item of sidebarData; track $index) { @if (item?.menu) {
-      <li class="cursor-pointer">
-        <a
-          [routerLink]="item?.route"
-          type="button"
-          class="flex items-center w-full py-2 px-3 -ml-1 text-gray-900 transition duration-75 rounded-lg hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-          [attr.aria-controls]="item.label"
-          [attr.data-accordion-target]="'#' + item?.label"
-          aria-expanded="false"
-        >
-          <app-all-svg [icon]="item.icon"></app-all-svg>
-          <span
-            class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap text-gray-900"
-            >{{ item.label }}</span
-          >
-          @if (item?.menu) {<app-all-svg icon="sidebar-down-arrow"></app-all-svg
-          >}
-        </a>
-        <ul
-          [id]="item?.label"
-          [attr.aria-labelledby]="item?.label"
-          class="hidden group-hover:py-2 h-0 w-[97%] mx-auto group-hover:h-full group-hover:bg-teal-200 rounded-lg"
-        >
-          @for (subItem of item.menu; track $index) {
-          <li class="cursor-pointer">
-            <a 
-              [routerLink]="subItem?.route"
-              class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-10 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-              >{{ subItem.label }}</a
+          <span class="inline-flex justify-center items-center ml-4">
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
             >
-          </li>
-          }
-        </ul>
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"
+              ></path>
+            </svg>
+          </span>
+          <span class="ml-2 text-sm tracking-wide truncate">User List</span>
+        </a>
       </li>
-      } @else{
+      }
+
+      <!-- Admin List  -->
+      @if (role == 'admin') {
       <li>
         <a
-          [routerLink]="item?.route"
-          type="button"
-          class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+          routerLink="/admin/admin-list"
+          class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-rose-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-rose-500 pr-6"
         >
-          <app-all-svg [icon]="item.icon"></app-all-svg>
-          <span
-            class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap"
-            >{{ item.label }}</span
-          >
-          @if (item?.menu) {<app-all-svg icon="sidebar-down-arrow"></app-all-svg
-          >}
+          <span class="inline-flex justify-center items-center ml-4">
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"
+              ></path>
+            </svg>
+          </span>
+          <span class="ml-2 text-sm tracking-wide truncate">Admin List</span>
         </a>
       </li>
-      } }
+      }
+
+      <!-- Gallery List  -->
+      @if (role == 'admin' || role == 'editor') {
+      <li>
+        <a
+          routerLink="/admin/gallery-list"
+          class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-rose-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-rose-500 pr-6"
+        >
+          <span class="inline-flex justify-center items-center ml-4">
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"
+              ></path>
+            </svg>
+          </span>
+          <span class="ml-2 text-sm tracking-wide truncate">Gallery List</span>
+        </a>
+      </li>
+      }
+
+      <!-- Logout  -->
+      <li class="cursor-pointer">
+        <a
+          (click)="logout()"
+          class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-rose-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-rose-500 pr-6"
+        >
+          <span class="inline-flex justify-center items-center ml-4">
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+              ></path>
+            </svg>
+          </span>
+          <span class="ml-2 text-sm tracking-wide truncate">Log Out</span>
+        </a>
+      </li>
     </ul>
+    <p class="mb-14 px-5 py-3 hidden md:block text-center text-xs">
+      Made by SuperSoft
+    </p>
   </div>
-</aside>
+</div>
