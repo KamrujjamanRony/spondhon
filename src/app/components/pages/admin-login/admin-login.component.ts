@@ -42,7 +42,7 @@ export class AdminLoginComponent {
               this.authService.setAdminInfo(response);
               this.success = 'Admin login successfully';
               setTimeout(() => {
-                this.router.navigateByUrl('admin/news');
+                this.router.navigateByUrl('admin/news-list');
                 this.success = null;
               }, 1500);
             } else {
