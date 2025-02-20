@@ -32,6 +32,10 @@ export class AdminService {
         return this.apiCall<void>('', 'get');
     }
 
+    getAdmin(id: any): Observable<void> {
+        return this.apiCall<void>(`/${id}`, 'get');
+    }
+
     updateAdmin(id: string | number, updateNewsRequest: any): Observable<any> {
         return this.apiCall<any>(`/${id}`, 'put', updateNewsRequest);
     }

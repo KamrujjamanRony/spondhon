@@ -8,6 +8,8 @@ import { NewsListComponent } from './components/pages/news-list/news-list.compon
 import { UserListComponent } from './components/pages/user-list/user-list.component';
 import { VideoListComponent } from './components/pages/video-list/video-list.component';
 import { AllNewsComponent } from './components/pages/all-news/all-news.component';
+import { UserFormComponent } from './components/pages/user-form/user-form.component';
+import { NewsFormComponent } from './components/pages/news-form/news-form.component';
 
 export const routes: Routes = [
   {
@@ -35,12 +37,36 @@ export const routes: Routes = [
         component: NewsListComponent
       },
       {
+        path: 'news-list/add',
+        component: NewsFormComponent
+      },
+      {
+        path: 'news-list/edit/:id',
+        component: NewsFormComponent
+      },
+      {
         path: 'video-list',
         component: VideoListComponent
       },
       {
+        path: 'news-list/add',
+        component: NewsFormComponent
+      },
+      {
+        path: 'news-list/edit/:id',
+        component: NewsFormComponent
+      },
+      {
         path: 'user-list',
         component: UserListComponent
+      },
+      {
+        path: 'user-list/add',
+        component: UserFormComponent
+      },
+      {
+        path: 'user-list/edit/:id',
+        component: UserFormComponent
       },
     ],
   },

@@ -1,0 +1,95 @@
+<section>
+  <div class="w-full max-w-7xl mx-auto">
+    <div class="text-center mb-5">
+      <h2 class="text-4xl capitalize font-bold">
+        {{ id ? "update news" : "add news" }}
+      </h2>
+    </div>
+    <form
+      #form="ngForm"
+      (ngSubmit)="onFormSubmit()"
+      class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+    >
+      <!-- username  -->
+      <div class="mb-4">
+        <label
+          for="username"
+          class="block text-black text-sm font-bold mb-2 capitalize"
+          >username</label
+        >
+        <input
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
+          id="username"
+          name="username"
+          type="text"
+          placeholder="Type here"
+          [(ngModel)]="username"
+          required
+        />
+      </div>
+      <!-- password  -->
+      <div class="mb-4">
+        <label
+          for="password"
+          class="block text-black text-sm font-bold mb-2 capitalize"
+          >password</label
+        >
+        <input
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
+          id="password"
+          name="password"
+          type="text"
+          placeholder="Type here"
+          [(ngModel)]="password"
+          required
+        />
+      </div>
+
+      <!-- role  -->
+      <div class="mb-4">
+        <label class="block text-black text-sm font-bold mb-2" for="role">
+          role
+        </label>
+        <select
+          name="role"
+          id="role"
+          [(ngModel)]="role"
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
+        >
+          <option selected disabled hidden value="">Select Role</option>
+          @for (option of roles; track $index) {
+          <option [value]="option?.value">
+            {{ option?.label }}
+          </option>
+          }
+        </select>
+      </div>
+
+      @if (loading()) {
+      <button [disabled]="loading()" class="btn btn-error text-white">
+        Processing...
+      </button>
+      } @else {
+      <input
+        type="submit"
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+        [value]="id ? 'Update' : 'Add'"
+      />
+      }
+    </form>
+  </div>
+
+  @if (error()) {
+  <div class="toast toast-top toast-end">
+    <div class="alert alert-error">
+      <span class="text-white">{{ error() }}</span>
+    </div>
+  </div>
+  } @if (success()) {
+  <div class="toast toast-top toast-end">
+    <div class="alert alert-success">
+      <span class="text-white">{{ success() }}</span>
+    </div>
+  </div>
+  }
+</section>

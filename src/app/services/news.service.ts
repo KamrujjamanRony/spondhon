@@ -23,6 +23,14 @@ export class NewsService {
     return this.apiCall<void>('', 'post', model);
   }
 
+  getAllNews(): Observable<any> {
+    return this.apiCall<any>('', 'get');
+  }
+
+  getNewsById(query: string): Observable<any> {
+    return this.apiCall<any>(`/${query}`, 'get');
+  }
+
   getNews(query: string): Observable<any> {
     return this.apiCall<any>(`/category/${query}`, 'get');
   }
