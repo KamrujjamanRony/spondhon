@@ -1,7 +1,7 @@
 @if (filterNews().length > 0) {
 <news-container
   [news]="filterNews()"
-  title="latest"
+  [title]="category"
   [isShowMore]="false"
 ></news-container>
 } @else {

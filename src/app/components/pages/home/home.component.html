@@ -30,6 +30,10 @@
     title="entertainment"
   ></news-container>
   } @if (videosNews().length > 0) {
-  <news-container [news]="videosNews()" title="videos"></news-container>
+  <news-container
+    [news]="videosNews()"
+    title="videos"
+    [isShowMore]="true"
+  ></news-container>
   }
 </section>

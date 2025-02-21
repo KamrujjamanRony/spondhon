@@ -1,1 +1,21 @@
-<p>news-info works!</p>
+<div
+  class="container mx-auto bg-white border border-gray-200 rounded-lg shadow-sm"
+>
+  <img
+    class="rounded-t-lg"
+    [src]="selectedNews()?.imageUrl"
+    [alt]="selectedNews()?.title"
+  />
+  <div class="p-5">
+    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">
+      {{ selectedNews()?.title }}
+    </h5>
+    <div class="flex justify-between items-center text-secondary font-semibold">
+      <span class="mr-2">Author: {{ selectedNews()?.author }}</span>
+      <span>Published: {{ transform(selectedNews()?.createdAt) }}</span>
+    </div>
+    <p class="mb-3 font-normal text-gray-700" style="white-space: pre-line">
+      {{ selectedNews()?.content }}
+    </p>
+  </div>
+</div>

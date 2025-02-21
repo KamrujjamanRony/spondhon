@@ -15,14 +15,14 @@
     }
   </div>
 
-  @if (title === "videos") {
+  @if (title == "videos") {
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
     @for (item of news; track $index) {
     <app-video-card
-      [title]="item.title"
-      [content]="item.content"
-      [img]="item.videoUrl"
-      [videoId]="item.videoUrl"
+      [title]="item?.title"
+      [content]="item?.content"
+      [img]="item?.videoUrl"
+      [videoId]="item?.videoUrl"
     />
     }
   </div>

@@ -54,8 +54,8 @@ export class VideoFormComponent {
 
   onFormSubmit(): void {
     this.loading.set(true);
-    const { title, content, category, videoUrl } = this.model();
-    if (title && content && category && videoUrl) {
+    const { title, category, videoUrl } = this.model();
+    if (title && category && videoUrl) {
 
       if (this.id) {
         this.newsSubscription = this.NewsService.updateNews(this.id, this.model())

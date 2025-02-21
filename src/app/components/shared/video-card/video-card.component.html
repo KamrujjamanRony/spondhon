@@ -3,11 +3,15 @@
   class="card full bg-slate-100 shadow-xl cursor-pointer h-full rounded-sm"
 >
   <figure>
-    <img [src]="img()" class="w-full" [alt]="title()" />
+    <img
+      [src]="'https://img.youtube.com/vi/' + img() + '/maxresdefault.jpg'"
+      class="w-full"
+      [alt]="title()"
+    />
   </figure>
   <div class="card-body">
     <h2 class="card-title text-center">{{ title() }}</h2>
-    <p>{{ content() }}</p>
+    <p>{{ content().slice(0, 100) }}</p>
   </div>
 </div>
 
