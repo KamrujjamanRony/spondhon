@@ -15,13 +15,13 @@ export class NewsFormComponent {
   router = inject(Router);
   route = inject(ActivatedRoute);
   id: any = null;
-  username = signal<any>("");
-  password = signal<any>("");
-  role = signal<any>("");
-  roles = [
-    { value: 'editor', label: 'Editor' },
-    { value: 'News', label: 'News' },
-  ]
+  model = signal<any>({
+    title: '',
+    content: '',
+    category: '',
+    imageUrl: ''
+  });
+  categories = ["sports", "education", "social", "entertainment"]
   paramsSubscription?: Subscription;
   newsSubscription?: Subscription;
   error = signal<any>(null);
@@ -38,12 +38,12 @@ export class NewsFormComponent {
         this.id = params.get('id');
         console.log(this.id)
         if (this.id) {
-          this.NewsService.getNews(this.id)
+          this.NewsService.getNewsById(this.id)
             .subscribe({
               next: (response: any) => {
+                console.log(response)
                 if (response) {
-                  this.username.set(response.username);
-                  this.role.set(response.role);
+                  this.model.set(response);
                 }
               }
             });
@@ -54,15 +54,11 @@ export class NewsFormComponent {
 
   onFormSubmit(): void {
     this.loading.set(true);
-    if (this.username() && this.password() && this.role()) {
-      const submitData = {
-        "username": this.username(),
-        "password": this.password(),
-        "role": this.role()
-      }
+    const { title, content, category, imageUrl } = this.model();
+    if (title && content && category && imageUrl) {
 
       if (this.id) {
-        this.newsSubscription = this.NewsService.updateNews(this.id, submitData)
+        this.newsSubscription = this.NewsService.updateNews(this.id, this.model())
           .subscribe({
             next: (response) => {
               this.success.set('News Update successfully');
@@ -71,7 +67,7 @@ export class NewsFormComponent {
               setTimeout(() => {
                 this.success.set(null);
                 this.loading.set(false);
-                this.router.navigate(['News/user-list']);
+                this.router.navigate(['admin/news-list']);
               }, 1500);
             },
             error: (error) => {
@@ -84,7 +80,7 @@ export class NewsFormComponent {
             }
           });
       } else {
-        this.newsSubscription = this.NewsService.addNews(submitData)
+        this.newsSubscription = this.NewsService.addNews(this.model())
           .subscribe({
             next: (response) => {
               this.success.set('News Add successfully');
@@ -92,7 +88,7 @@ export class NewsFormComponent {
               setTimeout(() => {
                 this.success.set(null);
                 this.loading.set(false);
-                this.router.navigate(['News/user-list']);
+                this.router.navigate(['admin/news-list']);
               }, 1500);
             },
             error: (error) => {
@@ -115,9 +111,12 @@ export class NewsFormComponent {
   };
 
   onReset() {
-    this.username.set("");
-    this.password.set("");
-    this.role.set("");
+    this.model.set({
+      title: '',
+      content: '',
+      category: '',
+      imageUrl: ''
+    });
   }
 
   ngOnDestroy(): void {

@@ -1,1 +1,11 @@
-<p>all-news works!</p>
+@if (filterNews().length > 0) {
+<news-container
+  [news]="filterNews()"
+  title="latest"
+  [isShowMore]="false"
+></news-container>
+} @else {
+<p class="text-center text-rose-500 text-md py-20 capitalize font-bold">
+  No news found!
+</p>
+}

@@ -1,4 +1,35 @@
 <section class="max-w-7xl mx-auto">
-  <app-carousel></app-carousel>
-  <news-container [news]="sportsNews()" title="rrerere"></news-container>
+  <!-- <app-carousel></app-carousel> -->
+  @if (latestNews().length > 0) {
+  <news-container
+    [news]="latestNews()"
+    [isShowMore]="false"
+    title="latest"
+  ></news-container>
+  } @if (sportsNews().length > 0) {
+  <news-container
+    [news]="sportsNews()"
+    [isShowMore]="true"
+    title="sports"
+  ></news-container>
+  } @if (educationNews().length > 0) {
+  <news-container
+    [news]="educationNews()"
+    [isShowMore]="true"
+    title="education"
+  ></news-container>
+  } @if (socialNews().length > 0) {
+  <news-container
+    [news]="socialNews()"
+    [isShowMore]="true"
+    title="social"
+  ></news-container>
+  } @if (entertainmentNews().length > 0) {
+  <news-container
+    [news]="entertainmentNews()"
+    title="entertainment"
+  ></news-container>
+  } @if (videosNews().length > 0) {
+  <news-container [news]="videosNews()" title="videos"></news-container>
+  }
 </section>

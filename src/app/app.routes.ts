@@ -10,6 +10,8 @@ import { VideoListComponent } from './components/pages/video-list/video-list.com
 import { AllNewsComponent } from './components/pages/all-news/all-news.component';
 import { UserFormComponent } from './components/pages/user-form/user-form.component';
 import { NewsFormComponent } from './components/pages/news-form/news-form.component';
+import { VideoFormComponent } from './components/pages/video-form/video-form.component';
+import { NewsInfoComponent } from './components/pages/news-info/news-info.component';
 
 export const routes: Routes = [
   {
@@ -24,6 +26,10 @@ export const routes: Routes = [
       {
         path: 'news/:category',
         component: AllNewsComponent
+      },
+      {
+        path: 'news-info/:id',
+        component: NewsInfoComponent
       },
     ],
   },
@@ -49,12 +55,12 @@ export const routes: Routes = [
         component: VideoListComponent
       },
       {
-        path: 'news-list/add',
-        component: NewsFormComponent
+        path: 'video-list/add',
+        component: VideoFormComponent
       },
       {
-        path: 'news-list/edit/:id',
-        component: NewsFormComponent
+        path: 'video-list/edit/:id',
+        component: VideoFormComponent
       },
       {
         path: 'user-list',

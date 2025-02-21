@@ -11,12 +11,32 @@ import { NewsService } from '../../../services/news.service';
 })
 export class HomeComponent {
   private newsService = inject(NewsService);
+  categories = ["sports", "education", "social", "entertainment", "videos"];
+  latestNews = signal<any[]>([]);
   sportsNews = signal<any[]>([]);
+  educationNews = signal<any[]>([]);
+  socialNews = signal<any[]>([]);
+  entertainmentNews = signal<any[]>([]);
+  videosNews = signal<any[]>([]);
 
   ngOnInit() {
-    this.newsService.getNews("rrerere").subscribe(data => {
-      this.sportsNews.set(data);
-      console.log(data)
+    this.newsService.getAllNews().subscribe(data => {
+      this.latestNews.set(data?.filter((news: any) => (news.imageUrl && !news.videoUrl))?.slice(0, 6));
+    });
+    this.newsService.getNews("sports").subscribe(data => {
+      this.sportsNews.set(data?.filter((news: any) => (news.imageUrl && !news.videoUrl))?.slice(0, 6));
+    });
+    this.newsService.getNews("education").subscribe(data => {
+      this.educationNews.set(data?.filter((news: any) => (news.imageUrl && !news.videoUrl))?.slice(0, 6));
+    });
+    this.newsService.getNews("social").subscribe(data => {
+      this.socialNews.set(data?.filter((news: any) => (news.imageUrl && !news.videoUrl))?.slice(0, 6));
+    });
+    this.newsService.getNews("entertainment").subscribe(data => {
+      this.entertainmentNews.set(data?.filter((news: any) => (news.imageUrl && !news.videoUrl))?.slice(0, 6));
+    });
+    this.newsService.getNews("videos").subscribe(data => {
+      this.videosNews.set(data?.filter((news: any) => (!news.imageUrl && news.videoUrl))?.slice(0, 6));
     });
   }
 

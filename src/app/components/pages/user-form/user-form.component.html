@@ -23,7 +23,7 @@
           name="username"
           type="text"
           placeholder="Type here"
-          [(ngModel)]="username"
+          [(ngModel)]="model().username"
           required
         />
       </div>
@@ -40,7 +40,7 @@
           name="password"
           type="text"
           placeholder="Type here"
-          [(ngModel)]="password"
+          [(ngModel)]="model().password"
           required
         />
       </div>
@@ -53,7 +53,7 @@
         <select
           name="role"
           id="role"
-          [(ngModel)]="role"
+          [(ngModel)]="model().role"
           class="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
         >
           <option selected disabled hidden value="">Select Role</option>

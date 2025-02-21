@@ -10,56 +10,75 @@
       (ngSubmit)="onFormSubmit()"
       class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
     >
-      <!-- username  -->
+      <!-- title  -->
       <div class="mb-4">
         <label
-          for="username"
+          for="title"
           class="block text-black text-sm font-bold mb-2 capitalize"
-          >username</label
+          >title</label
         >
         <input
           class="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
-          id="username"
-          name="username"
+          id="title"
+          name="title"
           type="text"
           placeholder="Type here"
-          [(ngModel)]="username"
-          required
-        />
-      </div>
-      <!-- password  -->
-      <div class="mb-4">
-        <label
-          for="password"
-          class="block text-black text-sm font-bold mb-2 capitalize"
-          >password</label
-        >
-        <input
-          class="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
-          id="password"
-          name="password"
-          type="text"
-          placeholder="Type here"
-          [(ngModel)]="password"
+          [(ngModel)]="model().title"
           required
         />
       </div>
 
-      <!-- role  -->
+      <!-- content  -->
       <div class="mb-4">
-        <label class="block text-black text-sm font-bold mb-2" for="role">
-          role
+        <label
+          for="content"
+          class="block text-black text-sm font-bold mb-2 capitalize"
+          >content</label
+        >
+        <textarea
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-black resize-y focus:outline-none focus:shadow-outline"
+          id="content"
+          name="content"
+          placeholder="Type here"
+          [(ngModel)]="model().content"
+          required
+          rows="5"
+        ></textarea>
+      </div>
+
+      <!-- imageUrl  -->
+      <div class="mb-4">
+        <label
+          for="imageUrl"
+          class="block text-black text-sm font-bold mb-2 capitalize"
+          >imageUrl</label
+        >
+        <input
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
+          id="imageUrl"
+          name="imageUrl"
+          type="text"
+          placeholder="Type here"
+          [(ngModel)]="model().imageUrl"
+          required
+        />
+      </div>
+
+      <!-- category  -->
+      <div class="mb-4">
+        <label class="block text-black text-sm font-bold mb-2" for="category">
+          category
         </label>
         <select
-          name="role"
-          id="role"
-          [(ngModel)]="role"
+          name="category"
+          id="category"
+          [(ngModel)]="model().category"
           class="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
         >
-          <option selected disabled hidden value="">Select Role</option>
-          @for (option of roles; track $index) {
-          <option [value]="option?.value">
-            {{ option?.label }}
+          <option selected disabled hidden value="">Select Category</option>
+          @for (option of categories; track $index) {
+          <option [value]="option" class="capitalize">
+            {{ option }}
           </option>
           }
         </select>

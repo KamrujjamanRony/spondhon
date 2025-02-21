@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AdminService } from '../../../services/admin.service';
@@ -16,8 +16,8 @@ export class AdminLoginComponent {
   private authService = inject(AuthService);
   router = inject(Router);
   model: any;
-  error: any;
-  success: any;
+  error = signal<any>(null);
+  success = signal<any>(null);
 
   constructor() {
     this.model = {
@@ -40,16 +40,16 @@ export class AdminLoginComponent {
             console.log(response)
             if (response) {
               this.authService.setAdminInfo(response);
-              this.success = 'Admin login successfully';
+              this.success.set('Admin login successfully');
               setTimeout(() => {
                 this.router.navigateByUrl('admin/news-list');
-                this.success = null;
+                this.success.set(null);
               }, 1500);
             } else {
-              this.error = 'Please Fill username and password correctly';
+              this.error.set('Please Fill username and password correctly');
               setTimeout(() => {
-                this.error = null;
-              }, 3000);
+                this.error.set(null);
+              }, 2000);
             }
 
           },
@@ -58,10 +58,10 @@ export class AdminLoginComponent {
           }
         });
     } else {
-      this.error = 'Please Fill username and password field';
+      this.error.set('Please Fill username and password field');
       setTimeout(() => {
-        this.error = null;
-      }, 3000);
+        this.error.set(null);
+      }, 2000);
     }
   }
 

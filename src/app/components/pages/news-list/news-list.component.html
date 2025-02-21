@@ -23,7 +23,7 @@
             class="text-xs font-semibold tracking-wide text-left text-black uppercase border-b bg-gray-50"
           >
             <th class="px-4 py-3 hidden md:inline-block">SL</th>
-            <th class="px-4 py-3 hidden sm:inline-block">imageUrl</th>
+            <th class="px-4 py-3 hidden sm:inline-block">image</th>
             <th class="px-4 py-3 max-w-18 md:max-w-12 min-w-12">title</th>
             <th class="px-4 py-3 max-w-18 md:max-w-12 min-w-12">content</th>
             <th class="px-4 py-3 max-w-18 md:max-w-12 min-w-12">category</th>
@@ -41,7 +41,11 @@
               {{ $index + 1 }}
             </td>
             <td class="px-4 py-3 text-xs hidden sm:inline-block">
-              {{ user?.imageUrl }}
+              <img
+                [src]="user?.imageUrl !== '' ? user?.imageUrl : emptyImg"
+                alt="News Image"
+                class="w-8 md:w-16 rounded"
+              />
             </td>
             <td class="px-4 py-3 text-xs">{{ user?.title }}</td>
             <td class="px-4 py-3 text-xs">

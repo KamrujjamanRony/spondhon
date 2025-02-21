@@ -15,6 +15,7 @@ export class NewsListComponent {
 
   filterNews = signal<any>([]);
   selectedRole: any = '';
+  emptyImg: any = '';
   toast = signal<any>("");
   loading = signal<boolean>(false);
 
@@ -24,7 +25,7 @@ export class NewsListComponent {
   onLoadData(): void {
     this.loading.set(true);
     this.NewsService.getAllNews().subscribe(data => {
-      this.filterNews.set(data);
+      this.filterNews.set(data.filter((news: any) => (news.imageUrl && !news.videoUrl)));
       this.loading.set(false);
     });
   }

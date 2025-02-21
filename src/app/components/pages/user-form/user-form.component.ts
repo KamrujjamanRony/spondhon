@@ -15,9 +15,11 @@ export class UserFormComponent {
   router = inject(Router);
   route = inject(ActivatedRoute);
   id: any = null;
-  username = signal<any>("");
-  password = signal<any>("");
-  role = signal<any>("");
+  model = signal<any>({
+    username: '',
+    password: '',
+    role: ''
+  });
   roles = [
     { value: 'editor', label: 'Editor' },
     { value: 'admin', label: 'Admin' },
@@ -27,10 +29,6 @@ export class UserFormComponent {
   error = signal<any>(null);
   success = signal<any>(null);
   loading = signal<boolean>(false);
-
-  constructor() {
-    this.onReset();
-  }
 
   ngOnInit(): void {
     this.paramsSubscription = this.route.paramMap.subscribe({
@@ -42,8 +40,7 @@ export class UserFormComponent {
             .subscribe({
               next: (response: any) => {
                 if (response) {
-                  this.username.set(response.username);
-                  this.role.set(response.role);
+                  this.model.set({ ...response, password: '' });
                 }
               }
             });
@@ -54,15 +51,11 @@ export class UserFormComponent {
 
   onFormSubmit(): void {
     this.loading.set(true);
-    if (this.username() && this.password() && this.role()) {
-      const submitData = {
-        "username": this.username(),
-        "password": this.password(),
-        "role": this.role()
-      }
+    const { username, password, role } = this.model();
+    if (username && password && role) {
 
       if (this.id) {
-        this.adminSubscription = this.adminService.updateAdmin(this.id, submitData)
+        this.adminSubscription = this.adminService.updateAdmin(this.id, this.model())
           .subscribe({
             next: (response) => {
               this.success.set('Admin Update successfully');
@@ -84,7 +77,7 @@ export class UserFormComponent {
             }
           });
       } else {
-        this.adminSubscription = this.adminService.registerAdmin(submitData)
+        this.adminSubscription = this.adminService.registerAdmin(this.model())
           .subscribe({
             next: (response) => {
               this.success.set('Admin Add successfully');
@@ -115,9 +108,7 @@ export class UserFormComponent {
   };
 
   onReset() {
-    this.username.set("");
-    this.password.set("");
-    this.role.set("");
+    this.model.set({ username: '', password: '', role: '' });
   }
 
   ngOnDestroy(): void {
